@@ -1,0 +1,1620 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developer Universe | Premium Developer Hub</title>
+    <meta name="description" content="A modern hub for developer tools, cloud technologies, AI resources, certifications, learning paths, and productivity solutions—all in one place.">
+    <meta name="theme-color" content="#0F172A">
+    
+    <meta property="og:title" content="Developer Universe">
+    <meta property="og:description" content="Discover premium developer tools, cloud technologies, and AI resources.">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* CSS Variables - Fluent Design System */
+        :root {
+            --primary: #0078D4;
+            --primary-glow: rgba(0, 120, 212, 0.4);
+            --accent: #4CC2FF;
+            --bg-base: #0F172A;
+            --bg-surface: rgba(255, 255, 255, 0.03);
+            --bg-surface-hover: rgba(255, 255, 255, 0.08);
+            --text-main: #F8FAFC;
+            --text-muted: #94A3B8;
+            --border-glass: rgba(255, 255, 255, 0.1);
+            --shadow-premium: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            --font-ui: 'Inter', system-ui, -apple-system, sans-serif;
+            --font-heading: 'Poppins', sans-serif;
+            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .light {
+            --bg-base: #F0F4F8;
+            --bg-surface: rgba(255, 255, 255, 0.7);
+            --bg-surface-hover: rgba(255, 255, 255, 0.9);
+            --text-main: #0F172A;
+            --text-muted: #475569;
+            --border-glass: rgba(0, 0, 0, 0.1);
+            --shadow-premium: 0 8px 32px 0 rgba(0, 0, 0, 0.05);
+        }
+
+        /* Reset & Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-ui);
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background-color 0.5s ease;
+        }
+
+        /* Animated Background Elements */
+        .bg-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        
+        .shape {
+            position: absolute;
+            filter: blur(100px);
+            opacity: 0.4;
+            animation: float 20s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .shape-1 { width: 500px; height: 500px; background: var(--primary); top: -10%; left: -10%; }
+        .shape-2 { width: 400px; height: 400px; background: var(--accent); bottom: -10%; right: -5%; animation-delay: -5s; }
+        .shape-3 { width: 600px; height: 600px; background: #6366f1; top: 40%; left: 40%; opacity: 0.2; animation-delay: -10s; }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(100px, 50px) rotate(180deg); }
+            100% { transform: translate(-50px, 100px) rotate(360deg); }
+        }
+
+        /* Progress Bar */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            width: 0%;
+            z-index: 1000;
+            transition: width 0.1s ease;
+            box-shadow: 0 0 10px var(--primary-glow);
+        }
+
+        /* Custom Cursor */
+        .cursor-dot, .cursor-outline {
+            position: fixed;
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: 9999;
+            pointer-events: none;
+        }
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent);
+        }
+        .cursor-outline {
+            width: 40px;
+            height: 40px;
+            border: 2px solid var(--primary);
+            transition: width 0.2s, height 0.2s, background-color 0.2s;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: rgba(15, 23, 42, 0.5);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-glass);
+            transition: var(--transition);
+        }
+
+        .nav-scrolled {
+            padding: 1rem 5%;
+            background: rgba(15, 23, 42, 0.85);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-main);
+            text-decoration: none;
+        }
+
+        .logo i {
+            color: var(--primary);
+            font-size: 1.8rem;
+            filter: drop-shadow(0 0 8px var(--primary-glow));
+        }
+
+        .nav-controls {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .search-container {
+            position: relative;
+        }
+
+        .search-container input {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-glass);
+            padding: 0.6rem 1.2rem 0.6rem 2.5rem;
+            border-radius: 20px;
+            color: var(--text-main);
+            font-family: var(--font-ui);
+            width: 250px;
+            transition: var(--transition);
+        }
+
+        .search-container input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 15px var(--primary-glow);
+            width: 300px;
+            background: var(--bg-surface-hover);
+        }
+
+        .search-container i {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        .icon-btn {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-glass);
+            color: var(--text-main);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .icon-btn:hover {
+            background: var(--bg-surface-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px var(--primary-glow);
+            color: var(--accent);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 5%;
+            position: relative;
+        }
+
+        .hero-badge {
+            background: rgba(0, 120, 212, 0.1);
+            border: 1px solid var(--primary);
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--accent);
+            margin-bottom: 2rem;
+            animation: slideDown 1s ease-out;
+        }
+
+        .hero h1 {
+            font-family: var(--font-heading);
+            font-size: clamp(3rem, 5vw, 5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, #fff, var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: zoomIn 1s ease-out;
+        }
+
+        .hero p {
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            color: var(--text-muted);
+            max-width: 800px;
+            margin-bottom: 3rem;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        .hero-ctas {
+            display: flex;
+            gap: 1.5rem;
+            animation: slideUp 1s ease-out;
+        }
+
+        .btn {
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-family: var(--font-ui);
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), #005a9e);
+            color: white;
+            box-shadow: 0 4px 15px var(--primary-glow);
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px var(--primary-glow);
+        }
+
+        .btn-glass {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-glass);
+            color: var(--text-main);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-glass:hover {
+            background: var(--bg-surface-hover);
+            transform: translateY(-3px);
+            border-color: var(--accent);
+        }
+
+        /* Section Layouts */
+        section {
+            padding: 6rem 5%;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .section-header h2 {
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        /* Categories Filter */
+        .filters {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 4rem;
+        }
+
+        .filter-btn {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-glass);
+            padding: 8px 20px;
+            border-radius: 20px;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 4px 15px var(--primary-glow);
+        }
+
+        /* Resource Grid & Cards */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-glass);
+            border-radius: 16px;
+            padding: 2rem;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: 16px;
+            padding: 2px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.2), rgba(255,255,255,0));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        .card:hover {
+            transform: translateY(-10px) rotateX(2deg) rotateY(2deg);
+            box-shadow: var(--shadow-premium), 0 0 20px var(--primary-glow);
+            background: var(--bg-surface-hover);
+            border-color: rgba(76, 194, 255, 0.3);
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--accent), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .card h3 {
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--text-main);
+        }
+
+        .card p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            flex-grow: 1;
+        }
+
+        .card-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card .btn-glass {
+            width: 100%;
+            justify-content: center;
+        }
+
+        .bookmark-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 10;
+        }
+
+        .bookmark-btn:hover, .bookmark-btn.active {
+            color: var(--accent);
+            transform: scale(1.2);
+        }
+
+        /* Statistics */
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-glass);
+            border-radius: 20px;
+            padding: 4rem 2rem;
+            backdrop-filter: blur(20px);
+        }
+
+        .stat-item h4 {
+            font-family: var(--font-heading);
+            font-size: 3.5rem;
+            background: linear-gradient(135deg, var(--accent), #fff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-item p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Journey Pipeline */
+        .journey-timeline {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            padding: 4rem 0;
+            overflow-x: auto;
+        }
+
+        .journey-timeline::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--border-glass);
+            z-index: 1;
+        }
+
+        .journey-step {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            background: var(--bg-base);
+            padding: 0 1rem;
+        }
+
+        .step-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--bg-surface);
+            border: 2px solid var(--primary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+            color: var(--accent);
+            box-shadow: 0 0 15px var(--primary-glow);
+            transition: var(--transition);
+        }
+
+        .journey-step:hover .step-icon {
+            transform: scale(1.1) rotate(10deg);
+            background: var(--primary);
+            color: white;
+        }
+
+        .journey-step span {
+            font-weight: 600;
+            font-family: var(--font-heading);
+        }
+
+        /* FAQ Accordion */
+        .faq-item {
+            margin-bottom: 1rem;
+            border: 1px solid var(--border-glass);
+            border-radius: 12px;
+            background: var(--bg-surface);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            width: 100%;
+            text-align: left;
+            background: none;
+            border: none;
+            color: var(--text-main);
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-question i {
+            transition: transform 0.3s;
+        }
+
+        .faq-question.active i {
+            transform: rotate(180deg);
+            color: var(--accent);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            padding: 0 1.5rem;
+            color: var(--text-muted);
+        }
+
+        .faq-question.active + .faq-answer {
+            padding-bottom: 1.5rem;
+            max-height: 200px;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(0, 0, 0, 0.2);
+            border-top: 1px solid var(--border-glass);
+            padding: 4rem 5% 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+            text-align: left;
+        }
+
+        .footer-col h4 {
+            font-family: var(--font-heading);
+            margin-bottom: 1.5rem;
+            color: var(--text-main);
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-col ul li a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--accent);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--bg-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-main);
+            text-decoration: none;
+            transition: var(--transition);
+            border: 1px solid var(--border-glass);
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            color: var(--text-muted);
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-glass);
+        }
+
+        /* Animations & Utilities */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes zoomIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+
+        #back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            border: none;
+            box-shadow: 0 4px 15px var(--primary-glow);
+            z-index: 999;
+        }
+
+        #back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #back-to-top:hover {
+            transform: translateY(-5px);
+            background: var(--accent);
+        }
+
+        /* Loading Screen */
+        #loader {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: var(--bg-base);
+            z-index: 99999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease;
+        }
+        
+        .spinner {
+            width: 50px; height: 50px;
+            border: 3px solid rgba(255,255,255,0.1);
+            border-radius: 50%;
+            border-top-color: var(--primary);
+            animation: spin 1s ease-in-out infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 20px; left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: rgba(0, 120, 212, 0.9);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 30px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 10000;
+            font-weight: 500;
+        }
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-controls .search-container { display: none; }
+            .hero h1 { font-size: 2.5rem; }
+            .hero-ctas { flex-direction: column; }
+            .journey-timeline { flex-direction: column; gap: 2rem; }
+            .journey-timeline::before { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="loader">
+        <div class="spinner"></div>
+    </div>
+
+    <div class="bg-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+
+    <div class="scroll-progress" id="progress-bar"></div>
+
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-outline" id="cursor-outline"></div>
+
+    <nav id="navbar">
+        <a href="#" class="logo">
+            <i class="fa-brands fa-microsoft"></i> Developer Universe
+        </a>
+        <div class="nav-controls">
+            <div class="search-container">
+                <i class="fa-solid fa-search"></i>
+                <input type="text" id="search-input" placeholder="Search resources, AI, cloud...">
+            </div>
+            <button class="icon-btn" id="theme-toggle" aria-label="Toggle Dark Mode" title="Toggle Theme">
+                <i class="fa-solid fa-moon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="hero-badge"><i class="fa-solid fa-rocket"></i> Welcome to the Future of Development</div>
+        <h1>Build the Next <br>Great Innovation</h1>
+        <p>A modern hub for developer tools, cloud technologies, AI resources, certifications, learning paths, and productivity solutions—all in one premium platform.</p>
+        <div class="hero-ctas">
+            <a href="#resources" class="btn btn-primary">Explore Resources <i class="fa-solid fa-arrow-down"></i></a>
+            <a href="https://learn.microsoft.com/?wt.mc_id=studentamb_527158" target="_blank" rel="noopener noreferrer" class="btn btn-glass">Start Learning <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+    </section>
+
+    <section class="reveal">
+        <div class="stats-container">
+            <div class="stat-item">
+                <h4 class="counter" data-target="1000">0</h4>
+                <p>Learning Resources</p>
+            </div>
+            <div class="stat-item">
+                <h4 class="counter" data-target="500">0</h4>
+                <p>Courses</p>
+            </div>
+            <div class="stat-item">
+                <h4 class="counter" data-target="100">0</h4>
+                <p>Developer Tools</p>
+            </div>
+            <div class="stat-item">
+                <h4 class="counter" data-target="50">0</h4>
+                <p>Communities</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="resources">
+        <div class="section-header reveal">
+            <h2>Developer Resources</h2>
+            <p>Discover premium tools to architect, build, and deploy your next big idea.</p>
+        </div>
+
+        <div class="filters reveal">
+            <button class="filter-btn active" data-filter="all">All Resources</button>
+            <button class="filter-btn" data-filter="azure">Azure & Cloud</button>
+            <button class="filter-btn" data-filter="ai">AI & Copilot</button>
+            <button class="filter-btn" data-filter="tools">Dev Tools</button>
+            <button class="filter-btn" data-filter="power">Power Platform</button>
+            <button class="filter-btn" data-filter="startups">Startups</button>
+            <button class="filter-btn" data-filter="learn">Learn & Community</button>
+        </div>
+
+        <div class="grid" id="resource-grid">
+            
+            <article class="card reveal" data-category="azure">
+                <button class="bookmark-btn" aria-label="Bookmark" onclick="toggleBookmark(this)"><i class="fa-regular fa-bookmark"></i></button>
+                <i class="fa-brands fa-microsoft card-icon"></i>
+                <h3>Azure</h3>
+                <p>Invent with purpose, realize cost savings, and make your organization more efficient with Microsoft Azure.</p>
+                <div class="card-actions">
+                    <a href="https://azure.microsoft.com/?wt.mc_id=studentamb_527158" target="_blank" rel="noopener noreferrer" class="btn btn-glass">Visit Resource <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </article>
+
+            <article class="card reveal" data-category="azure">
+                <button class="bookmark-btn" aria-label="Bookmark" onclick="toggleBookmark(this)"><i class="fa-regular fa-bookmark"></i></button>
+                <i class="fa-solid fa-cloud card-icon"></i>
+                <h3>Azure Free</h3>
+                <p>Build in the cloud with an Azure free account. Get free services and credits to deploy your applications.</p>
+                <div class="card-actions">
+                    <a href="https://azure.microsoft.com/free?wt.mc_id=studentamb_527158" target="_blank" rel="noopener noreferrer" class="btn btn-glass">Visit Resource <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </article>
+
+            <article class="card reveal" data-category="azure">
+                <button class="bookmark-btn" aria-label="Bookmark" onclick="toggleBookmark(this)"><i class="fa-regular fa-bookmark"></i></button>
+                <i class="fa-solid fa-graduation-cap card-icon"></i>
+                <h3>Azure for Students</h3>
+                <p>Kickstart your tech journey. Get $100 in Azure credits and free services, no credit card required.</p>
+                <div class="card-actions">
+                    <a href="https://azure.microsoft.com/free/students?wt.mc_id=studentamb_527158" target="_blank" rel="noopener noreferrer" class="btn btn-glass">Visit Resource <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </article>
+
+            <article class="card reveal" data-category="azure">
+                <button class="bookmark-btn" aria-label="Bookmark" onclick="toggleBookmark(this)"><i class="fa-solid fa-blog card-icon"></i></button>
+                <i class="fa-solid fa-server card-icon"></i>
+                <h3>Microsoft Cloud Blog</h3>
+                <p>Get the latest news, insights, and updates on Microsoft Cloud technologies and solutions.</p>
+                <div class="card-actions">
+                    <a href="https://www.microsoft.com/microsoft-cloud/blog?wt.mc_id=studentamb_527158" target="_blank" rel="noopener noreferrer" class="btn btn-glass">Visit Resource <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </article>
+
+            <article class="card reveal" data-category="tools">
+                <button class="bookmark-btn" aria-label="Bookmark" onclick="toggleBookmark(this)"><i class="fa-regular fa-bookmark"></i></button>
+                <i class="fa-solid fa-code card-icon"></i>
+                <h3>Microsoft Developer</h3>
+                <p>The central hub for developers to build, test, and deploy applications across multiple platforms.</p>
+                <div class="card-actions">
+                    <a href="https://developer.microsoft.com/?wt.mc_id=studentamb_527158" target="_blank" rel="noopener noreferrer" class="btn btn-glass">Visit Resource <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </article>
+
+            <article class="card reveal" data-category="tools">
+                <button class="bookmark-btn" aria-label="Bookmark" onclick="toggleBookmark(this)"><i class="fa-regular fa-bookmark"></i></button>
+                <i class="fa-solid fa-cube card-icon"></i>
+                <h3>.NET Framework</h3>
+                <p>A free, cross-platform, open-source developer platform for building many different types of applications.</p>
+                <div class="card-actions">
+                    <a href="https://dotnet.microsoft.com/?wt.mc_id=studentamb_527158" target="_blank" rel="noopener noreferrer" class="btn btn-glass">Visit Resource <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </article>
+
+            <article class="card reveal" data-category="tools">
+                <button class="bookmark-btn" aria-label="Bookmark" onclick="toggleBookmark(this)"><i class="fa-regular fa-bookmark"></i></button>
+                <i class="fa-solid fa-file-code card-icon"></i>
+                <h3>Visual Studio Code</h3>
+                <p>Code editing. Redefined. Free. Built on open source. Runs everywhere with powerful extensions.</p>
+                <div class="card-actions">
+                    <a href="https://code.visualstudio.com/?wt.mc_id=studentamb_527158" target="_blank" rel="noopener noreferrer" class="btn btn-glass">Visit Resource <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </article>
+
+            <article class="card reveal" data-category="tools">
+                <button class="bookmark-btn" aria-label="Bookmark" onclick="toggleBookmark(this)"><i class="fa-regular fa-bookmark"></i></button>
+                <i class="fa-solid fa-keyboard card-icon"></i>
+                <h3>Developer Blogs</h3>
+                <p>Stay up to date with the newest releases, engineering insights, and tech directly from Microsoft engineers.</p>
+                <div class="card-actions">
+                    <a href="https://devblogs.microsoft.com/?wt.mc_id=studentamb_527158" target="_blank" rel="noopener noreferrer" class="btn btn-glass">Visit Resource <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </article>
+
+            <article class="card reveal" data-category="ai">
+                <button class="bookmark-btn" aria-label="Bookmark" onclick="toggleBookmark(this)"><i class="fa-regular fa-bookmark"></i></button>
+                <i class="fa-solid fa-robot card-icon"></i>
+                <h3>Microsoft Copilot</h3>
+                <p>Your everyday AI companion. Boost productivity, write better code, and unleash creativity with Copilot.</p>
+                <div class="card-actions">
+                    <a href="https://copilot.microsoft.com/?wt.mc_id=studentamb_527158" target="_blank" rel="noopener noreferrer" class="btn btn-glass">Visit Resource <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </article>
+
+            <article class="card reveal" data-category="ai">
+                <button class="bookmark-btn" aria-label="Bookmark" onclick="toggleBookmark(this)"><i class="fa-regular fa-bookmark"></i></button>
+                <i class="fa-solid fa-wand-magic-sparkles card-icon"></i>
+                <h3>M365 Copilot</h3>
+                <p>Experience the power of generative AI directly integrated into the Microsoft 365 apps you use daily.</p>
+                <div class="card-actions">
+                    <a href="https://www.microsoft.com/microsoft-365/copilot?wt.mc_id=studentamb_527158" target="_blank" rel="noopener noreferrer" class="btn btn-glass">Visit Resource <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </article>
+
+            <article class="card reveal" data-category="ai">
+                <button class="bookmark-btn" aria-label="Bookmark" onclick="toggleBookmark(this)"><i class="fa-regular fa-bookmark"></i></button>
+                <i class="fa-solid fa-user-astronaut card-icon"></i>
+                <h3>Copilot for Individuals</h3>
+                <p>Elevate your personal productivity and creation process with Copilot Pro and individual AI features.</p>
+                <div class="card-actions">
+                    <a href="https://www.microsoft.com/microsoft-copilot/for-individuals?wt.mc_id=studentamb_527158" target="_blank" rel="noopener noreferrer" class="btn btn-glass">Visit Resource <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </article>
+
+            <article class="card reveal" data-category="ai">
+                <button class="bookmark-btn" aria-label="Bookmark" onclick="toggleBookmark(this)"><i class="fa-regular fa-bookmark"></i></button>
+                <i class="fa-solid fa-brain card-icon"></i>
+                <h3>Copilot Learning Center</h3>
+                <p>Master prompt engineering and discover advanced tips to maximize the value of Microsoft Copilot.</p>
+                <div class="card-actions">
+                    <a href="https://www.microsoft.com/microsoft-365/copilot-learning-center?wt.mc_id=studentamb_527158" target="_blank" rel="noopener noreferrer" class="btn btn-glass">Visit Resource <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </article>
+
+            <article class="card reveal" data-category="ai">
+                <button class="bookmark-btn" aria-label="Bookmark" onclick="toggleBookmark(this)"><i class="fa-regular fa-bookmark"></i></button>
+                <i class="fa-solid fa-book-open-reader card-icon"></i>
+                <h3>Copilot Documentation</h3>
+                <p>Deep dive into technical architectures, deployment guides, and API integration for Copilot.</p>
+                <div class="card-actions">
+                    <a href="https://learn.microsoft.com/copilot?wt.mc_id=studentamb_527158" target="_blank" rel="noopener noreferrer" class="btn btn-glass">Visit Resource <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </article>
+
+            <article class="card reveal" data-category="ai">
+                <button class="bookmark-btn" aria-label="Bookmark" onclick="toggleBookmark(this)"><i class="fa-regular fa-bookmark"></i></button>
+                <i class="fa-solid fa-database card-icon"></i>
+                <h3>Microsoft Fabric</h3>
+                <p>An end-to-end analytics platform that brings together all your data and analytics tools in one place.</p>
+                <div class="card-actions">
+                    <a href="https://www.microsoft.com/microsoft-fabric?wt.mc_id=studentamb_527158" target="_blank" rel="noopener noreferrer" class="btn btn-glass">Visit Resource <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </article>
+            
+            <article class="card reveal" data-category="ai">
+                <button class="bookmark-btn" aria-label="Bookmark" onclick="toggleBookmark(this)"><i class="fa-regular fa-bookmark"></i></button>
+                <i class="fa-solid fa-chart-pie card-icon"></i>
+                <h3>Learn Fabric</h3>
+                <p>Master enterprise data handling, data science, and real-time analytics with Microsoft Fabric docs.</p>
+                <div class="card-actions">
+                    <a href="https://learn.microsoft.com/fabric?wt.mc_id=studentamb_527158" target="_blank" rel="noopener noreferrer" class="btn btn-glass">Visit Resource <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </article>
+
+            <article class="card reveal" data-category="ai">
+                <button class="bookmark-btn" aria-label="Bookmark" onclick="toggleBookmark(this)"><i class="fa-regular fa-bookmark"></i></button>
+                <i class="fa-solid fa-users-rays card-icon"></i>
+                <h3>Fabric Community</h3>
+                <p>Connect with other data engineers and scientists. Share ideas and solve complex data problems together.</p>
+                <div class="card-actions">
+                    <a href="https://community.fabric.microsoft.com/?wt.mc_id=studentamb_527158" target="_blank" rel="noopener noreferrer" class="btn btn-glass">Visit Resource <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </article>
+
+            <article class="card reveal" data-category="ai">
+                <button class="bookmark-btn" aria-label="Bookmark" onclick="toggleBookmark(this)"><i class="fa-regular fa-bookmark"></i></button>
+                <i class="fa-solid fa-newspaper card-icon"></i>
+                <h3>Fabric Blog</h3>
+                <p>Get the latest product updates, architectural patterns, and success stories on Microsoft Fabric.</p>
+                <div class="card-actions">
+                    <a href="https://blog.fabric.microsoft.com/?wt.mc_id=studentamb_527158" target="_blank" rel="noopener noreferrer" class="btn btn-glass">Visit Resource <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </article>
+
+            <article class="card reveal" data-category="power">
+                <button class="bookmark-btn" aria-label="Bookmark" onclick="toggleBookmark(this)"><i class="fa-regular fa-bookmark"></i></button>
+                <i class="fa-solid fa-bolt card-icon"></i>
+                <h3>Power Platform</h3>
+                <p>Empower everyone to build apps, automate workflows, and analyze data rapidly with low-code solutions.</p>
+                <div class="card-actions">
+                    <a href="https://www.microsoft.com/power-platform?wt.mc_id=studentamb_527158" target="_blank" rel="noopener noreferrer" class="btn btn-glass">Visit Resource <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </article>
+
+            <article class="card reveal" data-category="power">
+                <button class="bookmark-btn" aria-label="Bookmark" onclick="toggleBookmark(this)"><i class="fa-regular fa-bookmark"></i></button>
+                <i class="fa-solid fa-gears card-icon"></i>
+                <h3>Learn Power Automate</h3>
+                <p>Boost your productivity by learning how to create automated workflows between your favorite apps.</p>
+                <div class="card-actions">
+                    <a href="https://learn.microsoft.com/power-automate?wt.mc_id=studentamb_527158" target="_blank" rel="noopener noreferrer" class="btn btn-glass">Visit Resource <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </article>
+
+            <article class="card reveal" data-category="power">
+                <button class="bookmark-btn" aria-label="Bookmark" onclick="toggleBookmark(this)"><i class="fa-regular fa-bookmark"></i></button>
+                <i class="fa-solid fa-chart-column card-icon"></i>
+                <h3>Learn Power BI</h3>
+                <p>Discover how to turn your unrelated sources of data into coherent, visually immersive insights.</p>
+                <div class="card-actions">
+                    <a href="https://learn.microsoft.com/power-bi?wt.mc_id=studentamb_527158" target="_blank" rel="noopener noreferrer" class="btn btn-glass">Visit Resource <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </article>
+
+            <article class="card reveal" data-category="power">
+                <button class="bookmark-btn" aria-label="Bookmark" onclick="toggleBookmark(this)"><i class="fa-regular fa-bookmark"></i></button>
+                <i class="fa-solid fa-mobile-screen-button card-icon"></i>
+                <h3>Learn Power Apps</h3>
+                <p>Learn to build professional-grade apps the easy way and increase business agility.</p>
+                <div class="card-actions">
+                    <a href="https://learn.microsoft.com/power-apps?wt.mc_id=studentamb_527158" target="_blank" rel="noopener noreferrer" class="btn btn-glass">Visit Resource <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </article>
+            
+            <article class="card reveal" data-category="power">
+                <button class="bookmark-btn" aria-label="Bookmark" onclick="toggleBookmark(this)"><i class="fa-solid fa-globe card-icon"></i></button>
+                <i class="fa-solid fa-globe card-icon"></i>
+                <h3>Learn Power Pages</h3>
+                <p>Quickly build secure, low-code business websites to deliver digital experiences to external users.</p>
+                <div class="card-actions">
+                    <a href="https://learn.microsoft.com/power-pages?wt.mc_id=studentamb_527158" target="_blank" rel="noopener noreferrer" class="btn btn-glass">Visit Resource <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </article>
+            
+            <article class="card reveal" data-category="power">
+                <button class="bookmark-btn" aria-label="Bookmark" onclick="toggleBookmark(this)"><i class="fa-regular fa-bookmark"></i></button>
+                <i class="fa-solid fa-book card-icon"></i>
+                <h3>Power Platform Docs</h3>
+                <p>Comprehensive documentation across the entire Power Platform suite for developers and admins.</p>
+                <div class="card-actions">
+                    <a href="https://learn.microsoft.com/power-platform?wt.mc_id=studentamb_527158" target="_blank" rel="noopener noreferrer" class="btn btn-glass">Visit Resource <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </article>
+
+            <article class="card reveal" data-category="power">
+                <button class="bookmark-btn" aria-label="Bookmark" onclick="toggleBookmark(this)"><i class="fa-regular fa-bookmark"></i></button>
+                <i class="fa-solid fa-comments card-icon"></i>
+                <h3>Power Platform Community</h3>
+                <p>Engage with experts, ask questions, and share solutions within the Power Platform user base.</p>
+                <div class="card-actions">
+                    <a href="https://community.powerplatform.com/?wt.mc_id=studentamb_527158" target="_blank" rel="noopener noreferrer" class="btn btn-glass">Visit Resource <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </article>
+            
+            <article class="card reveal" data-category="power">
+                <button class="bookmark-btn" aria-label="Bookmark" onclick="toggleBookmark(this)"><i class="fa-regular fa-bookmark"></i></button>
+                <i class="fa-solid fa-chart-line card-icon"></i>
+                <h3>Power BI Blog</h3>
+                <p>Latest announcements, tips, and tutorials directly from the Power BI engineering team.</p>
+                <div class="card-actions">
+                    <a href="https://powerbi.microsoft.com/blog?wt.mc_id=studentamb_527158" target="_blank" rel="noopener noreferrer" class="btn btn-glass">Visit Resource <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </article>
+
+            <article class="card reveal" data-category="startups">
+                <button class="bookmark-btn" aria-label="Bookmark" onclick="toggleBookmark(this)"><i class="fa-regular fa-bookmark"></i></button>
+                <i class="fa-solid fa-rocket card-icon"></i>
+                <h3>Founders Hub</h3>
+                <p>Microsoft for Startups Founders Hub helps you build your startup with free Azure credits and expert guidance.</p>
+                <div class="card-actions">
+                    <a href="https://www.microsoft.com/startups?wt.mc_id=studentamb_527158" target="_blank" rel="noopener noreferrer" class="btn btn-glass">Visit Resource <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </article>
+            
+            <article class="card reveal" data-category="startups">
+                <button class="bookmark-btn" aria-label="Bookmark" onclick="toggleBookmark(this)"><i class="fa-regular fa-bookmark"></i></button>
+                <i class="fa-solid fa-microchip card-icon"></i>
+                <h3>AI for Startups</h3>
+                <p>Accelerate your AI innovation. Gain access to leading AI models, tools, and infrastructure.</p>
+                <div class="card-actions">
+                    <a href="https://www.microsoft.com/startups/ai?wt.mc_id=studentamb_527158" target="_blank" rel="noopener noreferrer" class="btn btn-glass">Visit Resource <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </article>
+
+            <article class="card reveal" data-category="startups">
+                <button class="bookmark-btn" aria-label="Bookmark" onclick="toggleBookmark(this)"><i class="fa-regular fa-bookmark"></i></button>
+                <i class="fa-solid fa-seedling card-icon"></i>
+                <h3>Startup Learning</h3>
+                <p>Learning paths explicitly designed to help founders and CTOs scale their architecture and business.</p>
+                <div class="card-actions">
+                    <a href="https://learn.microsoft.com/startups?wt.mc_id=studentamb_527158" target="_blank" rel="noopener noreferrer" class="btn btn-glass">Visit Resource <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </article>
+            
+            <article class="card reveal" data-category="startups">
+                <button class="bookmark-btn" aria-label="Bookmark" onclick="toggleBookmark(this)"><i class="fa-regular fa-bookmark"></i></button>
+                <i class="fa-solid fa-chalkboard-user card-icon"></i>
+                <h3>Startup Training Modules</h3>
+                <p>Interactive, self-paced training topics focused entirely on startup technologies and lifecycle.</p>
+                <div class="card-actions">
+                    <a href="https://learn.microsoft.com/training/topics/startups?wt.mc_id=studentamb_527158" target="_blank" rel="noopener noreferrer" class="btn btn-glass">Visit Resource <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </article>
+            
+            <article class="card reveal" data-category="startups">
+                <button class="bookmark-btn" aria-label="Bookmark" onclick="toggleBookmark(this)"><i class="fa-regular fa-bookmark"></i></button>
+                <i class="fa-solid fa-pen-nib card-icon"></i>
+                <h3>Startups Blog</h3>
+                <p>Stories, advice, and product updates curated for the global startup ecosystem.</p>
+                <div class="card-actions">
+                    <a href="https://www.microsoft.com/startups/blog?wt.mc_id=studentamb_527158" target="_blank" rel="noopener noreferrer" class="btn btn-glass">Visit Resource <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </article>
+
+            <article class="card reveal" data-category="startups">
+                <button class="bookmark-btn" aria-label="Bookmark" onclick="toggleBookmark(this)"><i class="fa-regular fa-bookmark"></i></button>
+                <i class="fa-solid fa-trophy card-icon"></i>
+                <h3>Imagine Cup</h3>
+                <p>Join the premier global student technology competition. Build AI-driven solutions and win big.</p>
+                <div class="card-actions">
+                    <a href="https://imaginecup.microsoft.com/?wt.mc_id=studentamb_527158" target="_blank" rel="noopener noreferrer" class="btn btn-glass">Visit Resource <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </article>
+
+            <article class="card reveal" data-category="learn">
+                <button class="bookmark-btn" aria-label="Bookmark" onclick="toggleBookmark(this)"><i class="fa-regular fa-bookmark"></i></button>
+                <i class="fa-solid fa-graduation-cap card-icon"></i>
+                <h3>Microsoft Learn</h3>
+                <p>Discover comprehensive learning paths, gain skills, and earn industry-recognized certifications.</p>
+                <div class="card-actions">
+                    <a href="https://learn.microsoft.com/?wt.mc_id=studentamb_527158" target="_blank" rel="noopener noreferrer" class="btn btn-glass">Visit Resource <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </article>
+
+            <article class="card reveal" data-category="learn">
+                <button class="bookmark-btn" aria-label="Bookmark" onclick="toggleBookmark(this)"><i class="fa-solid fa-laptop-code card-icon"></i></button>
+                <i class="fa-solid fa-laptop-code card-icon"></i>
+                <h3>Learn for Developers</h3>
+                <p>Find technical documentation, quickstarts, and code samples specifically tailored for developers.</p>
+                <div class="card-actions">
+                    <a href="https://learn.microsoft.com/developer?wt.mc_id=studentamb_527158" target="_blank" rel="noopener noreferrer" class="btn btn-glass">Visit Resource <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </article>
+
+            <article class="card reveal" data-category="learn">
+                <button class="bookmark-btn" aria-label="Bookmark" onclick="toggleBookmark(this)"><i class="fa-regular fa-bookmark"></i></button>
+                <i class="fa-solid fa-calendar-days card-icon"></i>
+                <h3>Microsoft Events</h3>
+                <p>Register for global technical events, virtual training days, and developer conferences.</p>
+                <div class="card-actions">
+                    <a href="https://events.microsoft.com/?wt.mc_id=studentamb_527158" target="_blank" rel="noopener noreferrer" class="btn btn-glass">Visit Resource <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </article>
+
+            <article class="card reveal" data-category="learn">
+                <button class="bookmark-btn" aria-label="Bookmark" onclick="toggleBookmark(this)"><i class="fa-regular fa-bookmark"></i></button>
+                <i class="fa-solid fa-satellite-dish card-icon"></i>
+                <h3>Microsoft Reactor</h3>
+                <p>Join local hubs around the world for founders and developers to meet, learn, and innovate.</p>
+                <div class="card-actions">
+                    <a href="https://reactor.microsoft.com/?wt.mc_id=studentamb_527158" target="_blank" rel="noopener noreferrer" class="btn btn-glass">Visit Resource <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </article>
+
+            <article class="card reveal" data-category="learn">
+                <button class="bookmark-btn" aria-label="Bookmark" onclick="toggleBookmark(this)"><i class="fa-regular fa-bookmark"></i></button>
+                <i class="fa-solid fa-users card-icon"></i>
+                <h3>Tech Community</h3>
+                <p>Connect, collaborate, and share expertise with a global network of IT pros and developers.</p>
+                <div class="card-actions">
+                    <a href="https://techcommunity.microsoft.com/?wt.mc_id=studentamb_527158" target="_blank" rel="noopener noreferrer" class="btn btn-glass">Visit Resource <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </article>
+            
+            <article class="card reveal" data-category="learn">
+                <button class="bookmark-btn" aria-label="Bookmark" onclick="toggleBookmark(this)"><i class="fa-regular fa-bookmark"></i></button>
+                <i class="fa-solid fa-user-group card-icon"></i>
+                <h3>Student Leadership Community</h3>
+                <p>Join a vibrant, global community of passionate student technologists and local community leaders.</p>
+                <div class="card-actions">
+                    <a href="https://studentambassadors.microsoft.com/?wt.mc_id=studentamb_527158" target="_blank" rel="noopener noreferrer" class="btn btn-glass">Visit Resource <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </article>
+            
+            <article class="card reveal" data-category="learn">
+                <button class="bookmark-btn" aria-label="Bookmark" onclick="toggleBookmark(this)"><i class="fa-regular fa-bookmark"></i></button>
+                <i class="fa-solid fa-compass card-icon"></i>
+                <h3>Inside Track</h3>
+                <p>Discover how Microsoft runs on Microsoft. Learn from internal IT deployments and architectures.</p>
+                <div class="card-actions">
+                    <a href="https://www.microsoft.com/insidetrack?wt.mc_id=studentamb_527158" target="_blank" rel="noopener noreferrer" class="btn btn-glass">Visit Resource <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                </div>
+            </article>
+
+        </div>
+        
+        <div id="no-results" style="display:none; text-align:center; padding: 4rem 0;">
+            <i class="fa-solid fa-ghost" style="font-size: 3rem; color: var(--text-muted); margin-bottom: 1rem;"></i>
+            <h3>No resources found</h3>
+            <p style="color: var(--text-muted);">Try adjusting your search or filter criteria.</p>
+        </div>
+    </section>
+
+    <section class="reveal">
+        <div class="section-header">
+            <h2>The Developer Journey</h2>
+            <p>From learning the basics to deploying enterprise solutions.</p>
+        </div>
+        <div class="journey-timeline">
+            <div class="journey-step">
+                <div class="step-icon"><i class="fa-solid fa-book-open"></i></div>
+                <span>Learn</span>
+            </div>
+            <div class="journey-step">
+                <div class="step-icon"><i class="fa-solid fa-laptop-code"></i></div>
+                <span>Practice</span>
+            </div>
+            <div class="journey-step">
+                <div class="step-icon"><i class="fa-solid fa-hammer"></i></div>
+                <span>Build</span>
+            </div>
+            <div class="journey-step">
+                <div class="step-icon"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+                <span>Deploy</span>
+            </div>
+            <div class="journey-step">
+                <div class="step-icon"><i class="fa-solid fa-share-nodes"></i></div>
+                <span>Share</span>
+            </div>
+            <div class="journey-step">
+                <div class="step-icon"><i class="fa-solid fa-arrow-trend-up"></i></div>
+                <span>Grow</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="reveal">
+        <div class="section-header">
+            <h2>Frequently Asked Questions</h2>
+        </div>
+        <div class="faq-container" style="max-width: 800px; margin: 0 auto;">
+            
+            <div class="faq-item">
+                <button class="faq-question">What is Developer Universe? <i class="fa-solid fa-chevron-down"></i></button>
+                <div class="faq-answer">
+                    <p>Developer Universe is a modern hub designed to consolidate top-tier developer tools, cloud technologies, AI resources, learning paths, and certifications into one premium, easily navigable platform.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">Are these resources free? <i class="fa-solid fa-chevron-down"></i></button>
+                <div class="faq-answer">
+                    <p>Many resources, such as Microsoft Learn, documentation, and community portals, are entirely free. Azure and other cloud services offer generous free tiers, student credits, or trial periods for exploration.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">How do I get Azure Student credits? <i class="fa-solid fa-chevron-down"></i></button>
+                <div class="faq-answer">
+                    <p>You can verify your student status using your university email address to activate the Azure for Students offer, granting you $100 in credits and access to various free services without a credit card.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">How can I save resources? <i class="fa-solid fa-chevron-down"></i></button>
+                <div class="faq-answer">
+                    <p>You can use the bookmark icon on any card to save that specific resource to your browser's local storage. They will be highlighted the next time you visit.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h4 style="display:flex; align-items:center; gap:10px;">
+                    <i class="fa-brands fa-microsoft" style="color:var(--primary)"></i> Developer Universe
+                </h4>
+                <p style="color:var(--text-muted); max-width: 300px; margin-bottom: 1.5rem;">Empowering developers to achieve more through world-class tools, cloud infrastructure, and AI innovations.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Technologies</h4>
+                <ul>
+                    <li><a href="#">Azure Cloud</a></li>
+                    <li><a href="#">GitHub Copilot</a></li>
+                    <li><a href="#">Microsoft Fabric</a></li>
+                    <li><a href="#">.NET Framework</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Learning</h4>
+                <ul>
+                    <li><a href="#">Certifications</a></li>
+                    <li><a href="#">Career Paths</a></li>
+                    <li><a href="#">Student Hub</a></li>
+                    <li><a href="#">Educator Center</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Platform</h4>
+                <ul>
+                    <li><a href="#" onclick="copyLink(event)">Share Platform</a></li>
+                    <li><a href="#">Feedback</a></li>
+                    <li><a href="#">Privacy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; <span id="year"></span> Developer Universe. Built for the developer community.
+        </div>
+    </footer>
+
+    <button id="back-to-top" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
+    <div id="toast" class="toast">Action completed!</div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. Remove Loader
+            setTimeout(() => {
+                const loader = document.getElementById('loader');
+                loader.style.opacity = '0';
+                setTimeout(() => loader.style.display = 'none', 500);
+            }, 800);
+
+            // 2. Dynamic Year
+            document.getElementById('year').textContent = new Date().getFullYear();
+
+            // 3. Custom Cursor
+            const dot = document.getElementById('cursor-dot');
+            const outline = document.getElementById('cursor-outline');
+            
+            window.addEventListener('mousemove', (e) => {
+                dot.style.left = e.clientX + 'px';
+                dot.style.top = e.clientY + 'px';
+                
+                // Add slight delay for outline
+                setTimeout(() => {
+                    outline.style.left = e.clientX + 'px';
+                    outline.style.top = e.clientY + 'px';
+                }, 50);
+            });
+
+            document.querySelectorAll('a, button, input').forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    outline.style.width = '60px';
+                    outline.style.height = '60px';
+                    outline.style.backgroundColor = 'rgba(0, 120, 212, 0.1)';
+                });
+                el.addEventListener('mouseleave', () => {
+                    outline.style.width = '40px';
+                    outline.style.height = '40px';
+                    outline.style.backgroundColor = 'transparent';
+                });
+            });
+
+            // 4. Progress Bar & Navbar Scroll & Back to Top
+            const progressBar = document.getElementById('progress-bar');
+            const navbar = document.getElementById('navbar');
+            const backToTop = document.getElementById('back-to-top');
+
+            window.addEventListener('scroll', () => {
+                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrolled = (winScroll / height) * 100;
+                progressBar.style.width = scrolled + '%';
+
+                if (winScroll > 50) {
+                    navbar.classList.add('nav-scrolled');
+                } else {
+                    navbar.classList.remove('nav-scrolled');
+                }
+
+                if (winScroll > 500) {
+                    backToTop.classList.add('visible');
+                } else {
+                    backToTop.classList.remove('visible');
+                }
+            });
+
+            backToTop.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+
+            // 5. Scroll Reveal Animation (Intersection Observer)
+            const revealElements = document.querySelectorAll('.reveal');
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        // Counter animation trigger
+                        if(entry.target.querySelector('.counter')) {
+                            startCounters(entry.target);
+                        }
+                        revealObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            revealElements.forEach(el => revealObserver.observe(el));
+
+            // 6. Statistics Counter
+            let countersStarted = false;
+            function startCounters(container) {
+                if(countersStarted) return;
+                countersStarted = true;
+                const counters = container.querySelectorAll('.counter');
+                const speed = 200;
+
+                counters.forEach(counter => {
+                    const updateCount = () => {
+                        const target = +counter.getAttribute('data-target');
+                        const count = +counter.innerText;
+                        const inc = target / speed;
+
+                        if (count < target) {
+                            counter.innerText = Math.ceil(count + inc);
+                            setTimeout(updateCount, 20);
+                        } else {
+                            counter.innerText = target + "+";
+                        }
+                    };
+                    updateCount();
+                });
+            }
+
+            // 7. Search & Filter Logic
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const cards = document.querySelectorAll('.card');
+            const searchInput = document.getElementById('search-input');
+            const noResults = document.getElementById('no-results');
+
+            function filterResources() {
+                const searchTerm = searchInput.value.toLowerCase();
+                const activeFilter = document.querySelector('.filter-btn.active').getAttribute('data-filter');
+                let visibleCount = 0;
+
+                cards.forEach(card => {
+                    const title = card.querySelector('h3').textContent.toLowerCase();
+                    const desc = card.querySelector('p').textContent.toLowerCase();
+                    const category = card.getAttribute('data-category');
+                    
+                    const matchesSearch = title.includes(searchTerm) || desc.includes(searchTerm);
+                    const matchesFilter = activeFilter === 'all' || category === activeFilter;
+
+                    if (matchesSearch && matchesFilter) {
+                        card.style.display = 'flex';
+                        // Re-trigger animation
+                        card.style.animation = 'none';
+                        card.offsetHeight; /* trigger reflow */
+                        card.style.animation = null; 
+                        visibleCount++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+
+                noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+            }
+
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    filterResources();
+                });
+            });
+
+            searchInput.addEventListener('input', filterResources);
+
+            // 8. Dark Mode Toggle
+            const themeToggle = document.getElementById('theme-toggle');
+            const htmlTag = document.documentElement;
+            
+            // Check local storage
+            if (localStorage.getItem('theme') === 'light') {
+                htmlTag.classList.remove('dark');
+                htmlTag.classList.add('light');
+                themeToggle.innerHTML = '<i class="fa-solid fa-sun"></i>';
+            }
+
+            themeToggle.addEventListener('click', () => {
+                if (htmlTag.classList.contains('dark')) {
+                    htmlTag.classList.replace('dark', 'light');
+                    themeToggle.innerHTML = '<i class="fa-solid fa-sun"></i>';
+                    localStorage.setItem('theme', 'light');
+                    showToast('Light Mode Enabled');
+                } else {
+                    htmlTag.classList.replace('light', 'dark');
+                    themeToggle.innerHTML = '<i class="fa-solid fa-moon"></i>';
+                    localStorage.setItem('theme', 'dark');
+                    showToast('Dark Mode Enabled');
+                }
+            });
+
+            // 9. FAQ Accordion
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', () => {
+                    const isActive = question.classList.contains('active');
+                    
+                    // Close all
+                    faqQuestions.forEach(q => q.classList.remove('active'));
+                    
+                    if (!isActive) {
+                        question.classList.add('active');
+                    }
+                });
+            });
+
+            // 10. Load Bookmarks State
+            const savedBookmarks = JSON.parse(localStorage.getItem('devUniverseBookmarks')) || [];
+            cards.forEach(card => {
+                const title = card.querySelector('h3').textContent;
+                if (savedBookmarks.includes(title)) {
+                    const btn = card.querySelector('.bookmark-btn');
+                    btn.classList.add('active');
+                    btn.innerHTML = '<i class="fa-solid fa-bookmark"></i>';
+                }
+            });
+        });
+
+        // 11. Toast Notification Function
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // 12. Copy Link
+        function copyLink(e) {
+            e.preventDefault();
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                showToast('Platform link copied to clipboard!');
+            });
+        }
+
+        // 13. Toggle Bookmark
+        window.toggleBookmark = function(btn) {
+            const card = btn.closest('.card');
+            const title = card.querySelector('h3').textContent;
+            let bookmarks = JSON.parse(localStorage.getItem('devUniverseBookmarks')) || [];
+
+            btn.classList.toggle('active');
+            
+            if (btn.classList.contains('active')) {
+                btn.innerHTML = '<i class="fa-solid fa-bookmark"></i>';
+                bookmarks.push(title);
+                showToast('Resource bookmarked');
+            } else {
+                btn.innerHTML = '<i class="fa-regular fa-bookmark"></i>';
+                bookmarks = bookmarks.filter(b => b !== title);
+                showToast('Bookmark removed');
+            }
+
+            localStorage.setItem('devUniverseBookmarks', JSON.stringify(bookmarks));
+        }
+    </script>
+</body>
+</html>
